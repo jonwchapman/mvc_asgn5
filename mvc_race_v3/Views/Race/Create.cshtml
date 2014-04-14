@@ -1,0 +1,65 @@
+﻿@model mvc_race_v3.tblRace
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>tblRace</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RaceLocation, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RaceLocation)
+                @Html.ValidationMessageFor(model => model.RaceLocation)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RaceLengthMiles, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RaceLengthMiles)
+                @Html.ValidationMessageFor(model => model.RaceLengthMiles)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RaceWinnings, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RaceWinnings)
+                @Html.ValidationMessageFor(model => model.RaceWinnings)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Winner, "Winner", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Winner", String.Empty)
+                @Html.ValidationMessageFor(model => model.Winner)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

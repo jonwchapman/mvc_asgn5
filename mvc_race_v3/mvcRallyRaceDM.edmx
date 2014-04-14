@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="mvcRallyRaceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblRaces">
+          <Key>
+            <PropertyRef Name="RaceID" />
+          </Key>
+          <Property Name="RaceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RaceLocation" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="RaceLengthMiles" Type="int" Nullable="false" />
+          <Property Name="RaceWinnings" Type="money" Nullable="false" />
+          <Property Name="Winner" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblRallyRacer">
+          <Key>
+            <PropertyRef Name="RacerID" />
+          </Key>
+          <Property Name="RacerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="SeasonWins" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK__tblRaces__Winner__15502E78">
+          <End Role="tblRallyRacer" Type="Self.tblRallyRacer" Multiplicity="1" />
+          <End Role="tblRaces" Type="Self.tblRaces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRallyRacer">
+              <PropertyRef Name="RacerID" />
+            </Principal>
+            <Dependent Role="tblRaces">
+              <PropertyRef Name="Winner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="mvcRallyRaceModelStoreContainer">
+          <EntitySet Name="tblRaces" EntityType="Self.tblRaces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRallyRacer" EntityType="Self.tblRallyRacer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblRaces__Winner__15502E78" Association="Self.FK__tblRaces__Winner__15502E78">
+            <End Role="tblRallyRacer" EntitySet="tblRallyRacer" />
+            <End Role="tblRaces" EntitySet="tblRaces" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="mvcRallyRaceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblRace">
+          <Key>
+            <PropertyRef Name="RaceID" />
+          </Key>
+          <Property Name="RaceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RaceLocation" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RaceLengthMiles" Type="Int32" Nullable="false" />
+          <Property Name="RaceWinnings" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Winner" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblRallyRacer" Relationship="Self.FK__tblRaces__Winner__15502E78" FromRole="tblRaces" ToRole="tblRallyRacer" />
+        </EntityType>
+        <EntityType Name="tblRallyRacer">
+          <Key>
+            <PropertyRef Name="RacerID" />
+          </Key>
+          <Property Name="RacerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SeasonWins" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblRaces" Relationship="Self.FK__tblRaces__Winner__15502E78" FromRole="tblRallyRacer" ToRole="tblRaces" />
+        </EntityType>
+        <Association Name="FK__tblRaces__Winner__15502E78">
+          <End Role="tblRallyRacer" Type="Self.tblRallyRacer" Multiplicity="1" />
+          <End Role="tblRaces" Type="Self.tblRace" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRallyRacer">
+              <PropertyRef Name="RacerID" />
+            </Principal>
+            <Dependent Role="tblRaces">
+              <PropertyRef Name="Winner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="mvcRallyRaceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblRaces" EntityType="Self.tblRace" />
+          <EntitySet Name="tblRallyRacers" EntityType="Self.tblRallyRacer" />
+          <AssociationSet Name="FK__tblRaces__Winner__15502E78" Association="Self.FK__tblRaces__Winner__15502E78">
+            <End Role="tblRallyRacer" EntitySet="tblRallyRacers" />
+            <End Role="tblRaces" EntitySet="tblRaces" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="mvcRallyRaceModelStoreContainer" CdmEntityContainer="mvcRallyRaceEntities">
+          <EntitySetMapping Name="tblRaces">
+            <EntityTypeMapping TypeName="mvcRallyRaceModel.tblRace">
+              <MappingFragment StoreEntitySet="tblRaces">
+                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+                <ScalarProperty Name="RaceLocation" ColumnName="RaceLocation" />
+                <ScalarProperty Name="RaceLengthMiles" ColumnName="RaceLengthMiles" />
+                <ScalarProperty Name="RaceWinnings" ColumnName="RaceWinnings" />
+                <ScalarProperty Name="Winner" ColumnName="Winner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRallyRacers">
+            <EntityTypeMapping TypeName="mvcRallyRaceModel.tblRallyRacer">
+              <MappingFragment StoreEntitySet="tblRallyRacer">
+                <ScalarProperty Name="RacerID" ColumnName="RacerID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SeasonWins" ColumnName="SeasonWins" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

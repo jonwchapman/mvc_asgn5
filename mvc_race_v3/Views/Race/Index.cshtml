@@ -1,0 +1,51 @@
+﻿@model IEnumerable<mvc_race_v3.tblRace>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RaceLocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RaceLengthMiles)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RaceWinnings)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblRallyRacer.LastName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RaceLocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RaceLengthMiles)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RaceWinnings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblRallyRacer.LastName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RaceID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RaceID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RaceID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,50 @@
+﻿@model mvc_race_v3.tblRace
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tblRace</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceLocation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaceLocation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceLengthMiles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaceLengthMiles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceWinnings)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaceWinnings)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblRallyRacer.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblRallyRacer.LastName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RaceID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
